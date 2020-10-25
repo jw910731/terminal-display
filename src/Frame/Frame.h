@@ -11,7 +11,7 @@ class Frame : public BasicFrame<bool>{
 private:
     char16_t &setHelper(int x, int y);
 public:
-    //
+    Frame(int fd, unsigned short w, unsigned short h):super(fd, w, h){}
     void set(int x, int y, bool s) override;
 };
 

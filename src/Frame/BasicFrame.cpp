@@ -3,10 +3,11 @@
 //
 
 #include "BasicFrame.h"
+#include <cstdio>
 #include <unistd.h>
 
 template<typename Payload>
-void BasicFrame<Payload>::resize(int w, int h){
+void BasicFrame<Payload>::resize(unsigned short w, unsigned short h){
     this->w = w; this->h = h;
     frameBuf.shrink_to_fit();
     frameBuf.reserve(w*h);
@@ -14,6 +15,7 @@ void BasicFrame<Payload>::resize(int w, int h){
 
 template<typename Payload>
 void BasicFrame<Payload>::flush() {
+    puts("\x1b[d");
     // naive flush strategy
     for(int i = 0 ; i < this->h ; ++i){
         write(this->fd, frameBuf.data()+w*i, sizeof(char)*w);
